@@ -1,1 +1,8 @@
-
+name: proyecto_taller3
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
