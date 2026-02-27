@@ -5,7 +5,7 @@ def main() -> None:
     processed_path = Path("data/processed/processed_data.csv")
     fig_path = Path("results/figures/scatter_xy.png")
     df_proc = pd.read_csv(processed_path)
-    out = plot_scatter(df_proc, fig_path, title="Relación X vs Y (datos sintéticos)")
+    out = plot_scatter(df_proc, fig_path, title="Relación X vs Y - versión alternativa")
     print(f"Figura guardada: {out}")
 if __name__ == "__main__":
     main()
