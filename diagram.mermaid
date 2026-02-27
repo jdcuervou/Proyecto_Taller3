@@ -1,0 +1,28 @@
+flowchart TD
+  %% Taller 4 - Parte 3: Mermaid workflow (según repo taller4-GPI)
+
+  subgraph Inputs["Entradas"]
+    R["data/raw/simulated_data.csv\n(Datos)"]
+  end
+
+  subgraph Code["Código / Scripts"]
+    S1["scripts/run_simulation.py\n(Simulacion)"]
+    S2["scripts/run_processing.py\n(Procesamiento)"]
+    S3["scripts/run_visualization.py\n(Visualizacion)"]
+  end
+  subgraph Data["Datos intermedios"]
+    P["data/processed/processed_data.csv\n(Datos_Procesados)"]
+  end
+  subgraph Outputs["Salidas (Resultados/)"]
+    T1["results/tables/summary_by_group.csv\n(Tabla_Resumen)"]
+    T2["results/tables/model_coeffs.csv\n(Coeficientes)"]
+    F1["results/figures/scatter_xy.png\n(Figuras)"]
+  end
+  %% Flujo principal
+  S1 --> R
+  R --> S2
+  S2 --> P
+  S2 --> T1
+  S2 --> T2
+  P --> S3
+  S3 --> F1
