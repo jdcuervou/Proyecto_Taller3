@@ -9,15 +9,18 @@ def process_data(df: pd.DataFrame) -> pd.DataFrame:
     out["residual"] = out["y"] - out["y_hat_simple"]
     return out
 def summarize(df: pd.DataFrame) -> pd.DataFrame:
-    """Resumen"""
+    def corr_xy(g: pd.DataFrame) -> float:
+        return float(g["x"].corr(g["y"]))
     summary = (
         df.groupby("group", as_index=False)
-        .agg(
-            n=("x", "size"),
-            x_mean=("x", "mean"),
-            y_mean=("y", "mean"),
-            residual_mean=("residual", "mean"),
-      )
+        .apply(lambda g: pd.Series({
+            "n": g["x"].size,
+            "x_mean": g["x"].mean(),
+            "y_mean": g["y"].mean(),
+            "residual_mean": g["residual"].mean(),
+            "corr_xy": corr_xy(g),
+        }))
+        .reset_index(drop=True)
     )
     return summary
 def save_processed(df: pd.DataFrame, out_path: str | Path) -> Path:
